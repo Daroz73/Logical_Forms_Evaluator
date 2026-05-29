@@ -52,4 +52,4 @@ Asegurate de tener instalado Flet.
 1. **Clona este repositorio:**
    ```bash
    git clone [https://github.com/Daroz73/Logical_Forms_Evaluator.git](https://github.com/Daroz73/Logical_Forms_Evaluator.git)
-   cd TU_REPOSITORIO
+   cd Logical_Forms_Evaluator
