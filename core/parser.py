@@ -1,13 +1,14 @@
-from lexer import *
-from negation_node import Negation_Node
-from implies_node import Implies_Node
-from iff_node import IFF_Node
-from disyunction_node import Disyunction_Node
-from conjunction_node import Conjunction_Node
-from error_node import Error_Node
-from node import Node
-from node_atom import Node_Atom
-from paren_node import Paren_Node
+from core.lexer import *
+from core.negation_node import Negation_Node
+from core.implies_node import Implies_Node
+from core.iff_node import IFF_Node
+from core.disyunction_node import Disyunction_Node
+from core.conjunction_node import Conjunction_Node
+from core.error_node import Error_Node
+from core.node import Node
+from core.node_atom import Node_Atom
+from core.paren_node import Paren_Node
+from core.const_node import Const_Node
 
 class Parser:
     def __init__(self, form:str):
@@ -76,9 +77,9 @@ class Parser:
             self._next_token()
             counter += 1
         operator = self._current_token()
-        if counter % 2 == 0 and (operator.kind == TokenType.OPAREN or operator.kind == TokenType.VARIABLE or operator.kind == TokenType.NUMBER):
+        if counter % 2 == 0 and (operator.kind == TokenType.OPAREN or operator.kind == TokenType.VARIABLE or operator.kind == TokenType.CONST):
             operator = self._parse_atom()
-        elif operator.kind == TokenType.NUMBER or operator.kind == TokenType.VARIABLE or operator.kind == TokenType.OPAREN:
+        elif operator.kind == TokenType.CONST or operator.kind == TokenType.VARIABLE or operator.kind == TokenType.OPAREN:
             operator = Negation_Node(self._parse_atom())
         else:
             raise Error_Node("Syntaxi Error", "Se esperaba una variable o expresion")
@@ -88,9 +89,12 @@ class Parser:
 
     def _parse_atom(self) -> Node:
         atom = self._current_token()
-        if atom.kind == TokenType.VARIABLE or atom.kind == TokenType.NUMBER:
+        if atom.kind == TokenType.VARIABLE:
             self._next_token()
             return Node_Atom(atom)
+        elif atom.kind == TokenType.CONST:
+            self._next_token()
+            return Const_Node(atom.value)
         elif atom.kind == TokenType.OPAREN:
             self._next_token()
             atom = self._parse_iff()

@@ -1,4 +1,4 @@
-from parser import Parser
+from core.parser import Parser
 
 class Evaluator:
     def __init__(self, form:str):

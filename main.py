@@ -1,5 +1,5 @@
 import flet as ft
-from evaluator import Evaluator
+from core.evaluator import Evaluator
 
 
 def main(page: ft.Page):
@@ -9,12 +9,17 @@ def main(page: ft.Page):
 
     # Funciones para los botones
     def run_clicked(e):
+        if txt_editor.value == "":
+            txt_editor.hint_text = "The text is empty, We expect a form"
+            page.update()
+            return
         eval = Evaluator(txt_editor.value)
         txt_editor.value = eval.veritative_table()
         page.update()
 
     def clear_clicked(e):
         txt_editor.value = ""
+        txt_editor.hint_text = "Introduce your Form"
         page.update()
 
     # Elementos de la interface

@@ -1,4 +1,4 @@
-from node import Node
+from core.node import Node
 
 class Negation_Node(Node):
     def __init__(self, operando:Node):

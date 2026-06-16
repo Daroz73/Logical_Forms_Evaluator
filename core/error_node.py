@@ -1,5 +1,4 @@
-from lexer import Token
-from node import Node
+from core.node import Node
 
 class Error_Node(Node):
     def __init__(self, kind:str, description:str):

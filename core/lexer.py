@@ -3,7 +3,7 @@ from enum import Enum, auto
 class TokenType(Enum):
     # operanthors
     VARIABLE = auto()
-    NUMBER = auto()
+    CONST = auto()
     # operators
     NOT = auto()
     AND = auto()
@@ -51,7 +51,7 @@ class Lexer:
             elif c_char.isalpha() and c_char.islower():
                 self.tokens.append(Token(c_char, TokenType.VARIABLE))
             elif c_char.isdigit() and (int(c_char) == 0 or int(c_char) == 1):
-                self.tokens.append(Token(c_char, TokenType.NUMBER))
+                self.tokens.append(Token(c_char, TokenType.CONST))
             elif c_char == "=":
                 if self.expre[self.index] == ">":
                     val = c_char + self.expre[self.index]

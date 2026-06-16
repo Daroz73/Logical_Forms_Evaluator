@@ -1,5 +1,5 @@
-from node import Node
-from lexer import Token
+from core.node import Node
+from core.lexer import Token
 
 class Node_Atom(Node):
     def __init__(self, tk:Token):
